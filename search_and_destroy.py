@@ -10,10 +10,10 @@ keywords = keywords.split()
 # Zmienna do przechowywania liczby usuniętych plików
 deleted_files_count = 0
 
-# Przeszukiwanie folderu i usuwanie plików
-for filename in os.listdir(folder_path):
-    file_path = os.path.join(folder_path, filename)
-    if os.path.isfile(file_path):
+# Rekurencyjne przeszukiwanie folderu i usuwanie plików
+for root, dirs, files in os.walk(folder_path):
+    for filename in files:
+        file_path = os.path.join(root, filename)
         for keyword in keywords:
             if keyword in filename:
                 os.remove(file_path)
